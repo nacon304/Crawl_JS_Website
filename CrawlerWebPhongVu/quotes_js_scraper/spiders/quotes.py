@@ -18,7 +18,7 @@ class WebCrawlerSpider(scrapy.Spider):
     def parse_search_results(self, response):
         url_products  = response.css('div.folder > div.opened > div:nth-child(2) > span:nth-child(2)::text').getall()
         if url_products is not None:
-            lenn = 2
+            lenn = 1600
             maxx = lenn * 0
             for i in range(1, len(url_products), 2):
                 url = url_products[i]
@@ -67,9 +67,9 @@ class WebCrawlerSpider(scrapy.Spider):
         record['Price'] = json.dumps(record['Price'])
         record.pop('Original_Price')
         response = requests.post('https://mmt-main-dbserver.vercel.app/api/category', json=record)
-        # print(record)
-        # print(response)
-        # print(response.content)
+        print(record)
+        print(response)
+        print(response.content)
          
         # upload product
         record1 = data.copy()
@@ -79,9 +79,9 @@ class WebCrawlerSpider(scrapy.Spider):
         record1.pop('Desc')
         record1.pop('Original_Price')
         response = requests.post('https://mmt-main-dbserver.vercel.app/api/product', json=record1)
-        # print(record1)
-        # print(response)
-        # print(response.content)
+        print(record1)
+        print(response)
+        print(response.content)
         return 
 
 # scrapy crawl PhongVuCrawler -o outputFull.json
